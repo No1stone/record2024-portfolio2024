@@ -1,8 +1,8 @@
 
 server:
   shutdown: graceful
-#  servlet:
-#    context-path: /config
+  servlet:
+    context-path: /config
   host: localhost
   port: 8888
 spring:
