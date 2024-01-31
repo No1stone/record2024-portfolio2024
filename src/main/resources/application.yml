@@ -1,0 +1,15 @@
+
+server:
+  shutdown: graceful
+  servlet:
+    context-path: /config
+  host: localhost
+  port: 8000
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///home/wonseok/Documents/origemiteserver/configyml
