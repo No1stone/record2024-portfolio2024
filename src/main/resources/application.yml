@@ -15,4 +15,4 @@ spring:
 #          uri: file:///home/wonseok/Documents/origemiteserver/configyml
           uri: https://git.origemite.com/JANGWONSEOK/confgyml.git
           username: jangws1003@naver.com
-          password: ${gitpassword}
+          password: ${GIT_PASSWORD}
