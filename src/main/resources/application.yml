@@ -1,10 +1,10 @@
 
 server:
   shutdown: graceful
-  servlet:
-    context-path: /config
+#  servlet:
+#    context-path: /config
   host: localhost
-  port: 8000
+  port: 8888
 spring:
   application:
     name: configserver
@@ -12,4 +12,7 @@ spring:
     config:
       server:
         git:
-          uri: file:///home/wonseok/Documents/origemiteserver/configyml
+#          uri: file:///home/wonseok/Documents/origemiteserver/configyml
+          uri: https://git.origemite.com/JANGWONSEOK/confgyml.git
+          username: jangws1003@naver.com
+          password: ${gitpassword}
