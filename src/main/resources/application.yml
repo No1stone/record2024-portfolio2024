@@ -15,7 +15,7 @@ spring:
   #  main:
   #    allow-bean-definition-overriding: true
   application:
-    name: auth
+    name: auth-server
   jpa:
     properties:
       #      hibernate:   #??? DB?????? ???? ????
@@ -56,16 +56,16 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, info
+        include: refresh, health, beans, httpexchanges, busrefresh, info, metrics, prometheus
 
 
-swagger:
-  url: /swagger-ui/index.html#
+#swagger:
+#  url: /swagger-ui/index.html#
 
 # swagger-ui custom path
 springdoc:
   swagger-ui:
-    pat: /swagger-ui.html
+    path: /swagger-ui.html
 
 
 
