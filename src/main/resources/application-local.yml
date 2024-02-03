@@ -1,0 +1,36 @@
+server:
+  host: localhost
+  port: 9001
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: ${DB_URL}
+#    url: jdbc:log4jdbc:mysql://localhost:3306/ICS_CINNAMON_SOE?rewriteBatchedStatements=true
+    username: ${DB_USER}
+#    username: ics_mgr
+    password: ${DB_PASSWORD}
+#    password: "#pass180901"
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    type: org.apache.tomcat.jdbc.pool.DataSource
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 60000
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+#        dialect: org.hibernate.dialect.Oracle10gDialect
+#        dialect: com.icomsys.main_vm.common.util.CustomDialect
+#https://docs.jboss.org/hibernate/orm/3.5/javadocs/org/hibernate/dialect/package-summary.html
+  flyway:
+    enabled: false
+    baseline-on-migrate: false
+    baseline-version: 1
+
