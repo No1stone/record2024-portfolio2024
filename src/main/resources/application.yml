@@ -16,3 +16,11 @@ spring:
           uri: https://git.origemite.com/JANGWONSEOK/confgyml.git
           username: jangws1003@naver.com
           password: ${GIT_PASSWORD}
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        prefetch: 5
