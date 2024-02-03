@@ -3,7 +3,7 @@
 server:
   shutdown: graceful
   servlet:
-    context-path: /auth-server
+    context-path: /auth
 
 
 spring:
