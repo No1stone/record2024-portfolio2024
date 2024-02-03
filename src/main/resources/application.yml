@@ -9,8 +9,16 @@ eureka:
 spring:
   application:
     name: gateway
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        prefetch: 5
 
-    #https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html
+  #https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html
 management:
   endpoints:
     web:
