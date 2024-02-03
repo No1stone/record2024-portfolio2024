@@ -14,9 +14,7 @@ spring:
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}
-#    username: ics_mgr
     password: ${DB_PASSWORD}
-#    password: "#pass180901"
     driver-class-name: net.sf.log4jdbc.DriverSpy
 #    driver-class-name: oracle.jdbc.driver.OracleDriver
 #    type: org.apache.tomcat.jdbc.pool.DataSource
