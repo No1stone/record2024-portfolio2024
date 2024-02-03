@@ -17,7 +17,6 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableScheduling
 @EnableTransactionManagement
 @EnableJpaRepositories("com.origemite.authserver.data.db.repo")
 public class ConfigDatasource {
@@ -87,11 +86,11 @@ public class ConfigDatasource {
         return em.getObject();
     }
 
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(this.entityManagerFactory());
-        return transactionManager;
-    }
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//        JpaTransactionManager transactionManager = new JpaTransactionManager();
+//        transactionManager.setEntityManagerFactory(this.entityManagerFactory());
+//        return transactionManager;
+//    }
 
 }
