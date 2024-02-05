@@ -50,3 +50,8 @@ spring:
     baseline-on-migrate: false
     baseline-version: 1
 
+# configserver로 사용예정 로컬용
+jwt:
+  secret: test_secret
+  accessMillis: 86400000 #1일
+  refreshMillis: 15552000000 #180일
