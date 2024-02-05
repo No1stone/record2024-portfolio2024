@@ -1,11 +1,14 @@
 package com.origemite.authserver.biz.service;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.Date;
 
 @Service
@@ -26,8 +29,9 @@ public class JwtService {
                 .setSubject(usrId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + accessMillis))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
+
     }
 
     public String generateRefreshToken(String usrId) {
@@ -35,17 +39,17 @@ public class JwtService {
                 .setSubject(usrId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + refreshMillis))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public String getUsernameFromToken(String token) {
-        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
         return claims.getSubject();
     }
 
     public boolean validateToken(String token) {
-        Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+        Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token);
         return !isTokenExpired(token);
     }
 
@@ -55,8 +59,12 @@ public class JwtService {
     }
 
     private Date getExpirationDateFromToken(String token) {
-        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
         return claims.getExpiration();
     }
 
+    private Key getSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
 }
