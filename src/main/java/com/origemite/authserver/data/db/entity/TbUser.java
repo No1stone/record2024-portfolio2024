@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 
 @Table(name = "TB_USER")
 @Entity
+@Getter
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
@@ -26,6 +28,9 @@ public class TbUser {
 
     @Column(name = "USR_EMAIL", nullable = false, length = 200)
     private String usrEmail;
+
+    @Column(name = "USR_PASSWORD", nullable = false, length = 200)
+    private String usrPassword;
 
     @Column(name = "USR_NAME", nullable = false, length = 50)
     private String usrName;
@@ -46,10 +51,11 @@ public class TbUser {
     private LocalDateTime updateAt;
 
     @Builder
-    public TbUser(String usrId, String ctmId, String usrEmail, String usrName, String usrDesc, String usrMobile, String usrRole, LocalDateTime createAt, LocalDateTime updateAt) {
+    public TbUser(String usrId, String ctmId, String usrEmail, String usrPassword, String usrName, String usrDesc, String usrMobile, String usrRole, LocalDateTime createAt, LocalDateTime updateAt) {
         this.usrId = usrId;
         this.ctmId = ctmId;
         this.usrEmail = usrEmail;
+        this.usrPassword = usrPassword;
         this.usrName = usrName;
         this.usrDesc = usrDesc;
         this.usrMobile = usrMobile;
