@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ReqSignin {
-    @Email
+//    @Email
     private String email;
     private String password;
 
