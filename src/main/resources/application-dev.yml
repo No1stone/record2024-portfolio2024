@@ -1,5 +1,7 @@
 server:
   host: localhost
+  ## 랜덤포트 배포는 나중에 적용
+#  port: 0
   port: 9001
 
 eureka:
