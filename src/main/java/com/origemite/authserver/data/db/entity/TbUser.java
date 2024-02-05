@@ -42,7 +42,7 @@ public class TbUser {
     private String usrMobile;
 
     @Column(name = "USR_ROLE", nullable = false)
-    private String usrRole;
+    private int usrRole;
 
     @Column(name = "CREATE_AT", nullable = false)
     private LocalDateTime createAt;
@@ -51,7 +51,8 @@ public class TbUser {
     private LocalDateTime updateAt;
 
     @Builder
-    public TbUser(String usrId, String ctmId, String usrEmail, String usrPassword, String usrName, String usrDesc, String usrMobile, String usrRole, LocalDateTime createAt, LocalDateTime updateAt) {
+
+    public TbUser(String usrId, String ctmId, String usrEmail, String usrPassword, String usrName, String usrDesc, String usrMobile, int usrRole, LocalDateTime createAt, LocalDateTime updateAt) {
         this.usrId = usrId;
         this.ctmId = ctmId;
         this.usrEmail = usrEmail;
