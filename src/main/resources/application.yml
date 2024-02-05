@@ -33,8 +33,8 @@ spring:
   devtools:
     livereload:
       enabled: false
-    restart:
-      enabled: true
+#    restart:
+#      enabled: true
   servlet:
     multipart:
       enabled: true
