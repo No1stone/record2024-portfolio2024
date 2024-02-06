@@ -1,6 +1,9 @@
 package com.origemite.authserver.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +17,7 @@ import java.util.Map;
 
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class ConfigKafka {
 
     @Bean
@@ -30,7 +34,5 @@ public class ConfigKafka {
     public KafkaTemplate<String, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-
-
 
 }
