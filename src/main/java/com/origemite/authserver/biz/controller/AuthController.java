@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/token")
 public class AuthController {
 
     private final AuthenticationService authenticationService;
