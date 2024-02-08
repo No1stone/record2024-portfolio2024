@@ -39,11 +39,11 @@ public class ReqSignup {
     @Size(max = 50, message = "50자를 초과 할 수 없습니다.")
     private String usrName;
 
-    @Schema(name = "usrDesc", description = "유저이름", example = "origem", required = false, type = "String", maxLength = 100)
+    @Schema(name = "usrDesc", description = "유저이름", example = "name", required = false, type = "String", maxLength = 100)
     @Size(max = 100, message = "100자를 초과 할 수 없습니다.")
     private String usrDesc;
 
-    @Schema(name = "usrMobile", description = "전화번호", example = "origem", required = false, type = "String", maxLength = 20)
+    @Schema(name = "usrMobile", description = "전화번호", example = "010-1234-5678", required = false, type = "String", maxLength = 20)
     @Size(max = 100, message = "20자를 초과 할 수 없습니다.")
     private String usrMobile;
 
@@ -63,13 +63,14 @@ public class ReqSignup {
         this.usrRole = usrRole;
     }
 
-    public TbUser toUserRepoSave() {
+    public TbUser toUserRepoSave(ConfigPasswordEncoder passwordEncoder) {
         String[] random = UUID.randomUUID().toString().split("-");
+        String id = "USR_"+ MyFormatter.yyyyMMdd()+"_"+random[0]+random[1];
         return TbUser.builder()
-                .usrId("USR_"+ MyFormatter.yyyyMMdd()+random[0]+random[1])
+                .usrId(id)
                 .ctmId(this.ctmId)
                 .usrEmail(this.usrEmail)
-                .usrPassword(this.usrPassword)
+                .usrPassword(passwordEncoder.passwordEncoder().encode(this.usrPassword))
                 .usrName(this.usrName)
                 .usrDesc(this.usrDesc)
                 .usrMobile(this.usrMobile)
