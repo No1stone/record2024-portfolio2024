@@ -31,7 +31,7 @@ public class ConfigSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/api/v1/token/**","/api/v1/test/**","/swagger-ui/**")
+                        request.requestMatchers("/api/v1/token/**","/api/v1/test/**","/swagger-ui/**","/swagger-resources/**","/favicon.ico"  ,"/v3/api-docs/**"  )
                         .permitAll().anyRequest().authenticated())
 //                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
 //                        .permitAll().anyRequest().authenticated())
