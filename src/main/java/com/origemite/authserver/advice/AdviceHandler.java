@@ -88,7 +88,6 @@ public class AdviceHandler {
     @ExceptionHandler
     public ResponseEntity CustomBindEx(BindException ex) {
         ErrorResult er = new ErrorResult();
-        log.info("bind 들어옴");
         String message = null;
         List<ObjectError> allErrors = ex.getBindingResult().getAllErrors();
         for (ObjectError error : allErrors) {
