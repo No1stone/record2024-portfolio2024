@@ -30,9 +30,9 @@ spring:
       serialization:
         fail-on-empty-beans: false
     open-in-view: false
-  devtools:
-    livereload:
-      enabled: false
+#  devtools:
+#    livereload:
+#      enabled: false
 #    restart:
 #      enabled: true
   servlet:
