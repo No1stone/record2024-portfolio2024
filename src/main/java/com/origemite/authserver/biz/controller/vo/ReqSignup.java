@@ -4,9 +4,7 @@ import com.origemite.authserver.cmm.MyFormatter;
 import com.origemite.authserver.config.ConfigPasswordEncoder;
 import com.origemite.authserver.data.db.entity.TbUser;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -48,8 +46,9 @@ public class ReqSignup {
     private String usrMobile;
 
     @Schema(name = "usrRole", description = "롤", example = "1", required = false, type = "Integer", maxLength = 2)
-    @Size(max = 99, message = "99를 초과 할 수 없습니다.")
-    @NotBlank(message = "롤은 필수값입니다.")
+    @Max(message = "99를 초과 할 수 없습니다.", value = 99)
+    @Min(message = "0보다 커야합니다", value = 1)
+    @NotNull(message = "롤은 필수값입니다.")
     private int usrRole;
 
     @Builder

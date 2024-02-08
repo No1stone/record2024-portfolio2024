@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,8 +27,9 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ResToken> OrigemiteSignup(@RequestBody ReqSignup request) throws CustomBadRequestException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResToken.builder().token(authenticationService.signup(request)).build());
+    public ResponseEntity<ResToken> OrigemiteSignup(@Validated @RequestBody ReqSignup request) throws CustomBadRequestException {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ResToken.builder().token(authenticationService.signup(request)).build());
     }
 
 }
