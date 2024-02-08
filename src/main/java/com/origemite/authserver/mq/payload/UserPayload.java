@@ -22,8 +22,8 @@ public class UserPayload {
     private String usrDesc;
     private String usrMobile;
     private int usrRole;
-    private long createAt;
-    private long updateAt;
+    private String createAt;
+    private String updateAt;
 
 
 }
