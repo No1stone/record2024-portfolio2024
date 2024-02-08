@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface TbUserRepo extends JpaRepository<TbUser, String> {
 
     Optional<TbUser> findByUsrEmail(String email);
+    Boolean existsByUsrEmail(String email);
 
 }
