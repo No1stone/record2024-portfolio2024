@@ -2,6 +2,7 @@ package com.origemite.authserver.mq;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -22,7 +23,8 @@ public class KafkaProducer {
         catch (JsonProcessingException e){
             e.printStackTrace();
         }
-        kafkaTemplate.send(topic, data);
+        kafkaTemplate.send(topic, obj);
+        log.info("send - {}", obj);
         return data;
     }
 

@@ -25,8 +25,8 @@ public class Schema {
                 , new Field("string",true, "USR_DESC")
                 , new Field("string",true, "USR_MOBILE")
                 , new Field("int32",true, "USR_ROLE")
-                , new Field("int64",true, "CREATE_AT")
-                , new Field("int64",true, "UPDATE_AT")
+                , new Field("string",true, "CREATE_AT", "io.confluent.connect.avro.util.Date")
+                , new Field("string",true, "UPDATE_AT", "io.confluent.connect.avro.util.Date")
         );
         return Schema.builder()
                 .type("struct")

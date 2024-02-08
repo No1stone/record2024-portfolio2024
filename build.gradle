@@ -48,7 +48,6 @@ dependencies {
 
 
 	implementation 'org.apache.httpcomponents:httpclient:4.5.14'
-
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	implementation 'com.google.code.gson:gson:2.10.1'
 	implementation 'com.googlecode.log4jdbc:log4jdbc:1.2'
