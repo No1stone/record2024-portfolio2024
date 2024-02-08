@@ -32,10 +32,10 @@ public class AuthenticationService {
         return jwt;
     }
 
-    public String signup(ReqSignup request) {
+    public String signup(ReqSignup dto) {
         String result = "";
-
-        request.toEncoder(passwordEncoder);
+        log.info("signup = {}", new Gson().toJson(dto.toUserRepoSave()));
+//        request.toEncoder(passwordEncoder);
 
         return result;
     }
