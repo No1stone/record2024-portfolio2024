@@ -5,6 +5,7 @@ import com.origemite.authserver.biz.controller.policy.vo.ResPolicySelect;
 import com.origemite.authserver.data.db.entity.id.TbUserPolicyId;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "TB_POLICY")
 @Entity
 @Setter
+@Getter
 @NoArgsConstructor
 @DynamicUpdate
 public class TbPolicy {
