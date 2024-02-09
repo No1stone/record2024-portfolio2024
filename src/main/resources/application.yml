@@ -15,7 +15,7 @@ spring:
   #  main:
   #    allow-bean-definition-overriding: true
   application:
-    name: auth-server
+    name: auth_server
   jpa:
     properties:
       #      hibernate:   #??? DB?????? ???? ????
