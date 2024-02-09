@@ -23,19 +23,19 @@ import java.util.UUID;
 public class ReqPolicyGroupSave {
 
     @Schema(name = "plcId", description = "정책", example = "plc", required = true, type = "String", maxLength = 50)
-    @NotBlank(message = "정책 아이디는  필수값입니다.")
+    @NotBlank(message = "정책 아이디는 필수 입니다.")
     @Size(max = 50, message = "50자를 초과 할 수 없습니다.")
     private String plcId;
 
     @Schema(name = "svcId", description = "서비스아이디", example = "plc", required = true, type = "String", maxLength = 50)
-    @NotBlank(message = "서비스 아이디는  필수값입니다.")
+    @NotBlank(message = "서비스 아이디는 필수 입니다.")
     @Size(max = 50, message = "50자를 초과 할 수 없습니다.")
-    @EnumValidator(enumClazz = ServiceCode.class, message = "검색 값을 확인해 주세요.")
+    @EnumValidator(enumClazz = ServiceCode.class, message = "서비스 아이디를 확인해 주세요.")
     private String svcId;
 
     @Schema(name = "svcRole", description = "롤", example = "1", required = false, type = "Integer", maxLength = 2)
     @Max(message = "99를 초과 할 수 없습니다.", value = 99)
-    @NotNull(message = "롤은 필수값입니다.")
+    @NotNull(message = "롤은 필수 입니다.")
     private int svcRole;
 
     @Builder
