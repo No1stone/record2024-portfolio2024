@@ -2,12 +2,11 @@ package com.origemite.authserver.biz.service;
 
 import com.google.gson.Gson;
 import com.origemite.authserver.advice.excep.CustomNotFoundException;
-import com.origemite.authserver.biz.controller.vo.ResUser;
+import com.origemite.authserver.biz.controller.user.vo.ResUser;
 import com.origemite.authserver.data.db.entity.TbUser;
 import com.origemite.authserver.data.db.repo.TbUserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
