@@ -59,11 +59,13 @@ public class ConfigRedis implements CachingConfigurer {
 //        return new MessageListenerAdapter(new RedisMessgeStringSubscriber());
 //    }
 
+    /*
+
     @Bean
     public ChannelTopic topic() {
         return new ChannelTopic("ch01");
     }
-
+ */
 //    @Override
 //    public CacheManager cacheManager() {
 //        ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager() {
