@@ -21,7 +21,6 @@ public class TbPolicy {
     @Column(name = "PLC_ID", nullable = false, length = 50)
     private String plcId;
 
-
     @Column(name = "CTM_ID", nullable = false, length = 50)
     private String ctmId;
 
