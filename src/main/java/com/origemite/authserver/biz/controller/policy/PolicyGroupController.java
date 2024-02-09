@@ -1,10 +1,7 @@
 package com.origemite.authserver.biz.controller.policy;
 
 import com.origemite.authserver.advice.excep.CustomNotFoundException;
-import com.origemite.authserver.biz.controller.policy.vo.ReqPolicyGroupSave;
-import com.origemite.authserver.biz.controller.policy.vo.ReqPolicyGroupSelect;
-import com.origemite.authserver.biz.controller.policy.vo.ReqPolicySave;
-import com.origemite.authserver.biz.controller.policy.vo.ResPolicySelect;
+import com.origemite.authserver.biz.controller.policy.vo.*;
 import com.origemite.authserver.biz.service.PolicyGroupService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,9 +27,9 @@ public class PolicyGroupController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/{plcId}")
-    public ReqPolicyGroupSelect PolicyGroupSelect(@PathVariable(name = "plcId")String plcId) throws CustomNotFoundException {
-        return policyGroupService.PolicyGroupSelect(plcId);
+    @GetMapping({"","/"})
+    public List<ResPolicyGroupSelect> PolicyGroupSelect(@Validated @ModelAttribute(name = "dto") ReqPolicyGroupSelect dto) throws CustomNotFoundException {
+        return policyGroupService.PolicyGroupSelect(dto);
     }
 
 
