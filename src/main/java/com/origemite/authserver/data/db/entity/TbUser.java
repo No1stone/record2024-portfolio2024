@@ -1,5 +1,6 @@
 package com.origemite.authserver.data.db.entity;
 
+import com.origemite.authserver.biz.controller.vo.ResUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
+
 import java.time.LocalDateTime;
 
 @Table(name = "TB_USER")
@@ -63,5 +65,19 @@ public class TbUser {
         this.usrRole = usrRole;
         this.createAt = createAt;
         this.updateAt = updateAt;
+    }
+
+    public ResUser toResUser() {
+        return ResUser.builder()
+                .usrId(this.usrId)
+                .ctmId(this.ctmId)
+                .usrEmail(this.usrEmail)
+                .usrName(this.usrName)
+                .usrDesc(this.usrDesc)
+                .usrMobile(this.usrMobile)
+                .usrRole(this.usrRole)
+                .createAt(this.createAt)
+                .updateAt(this.updateAt)
+                .build();
     }
 }
