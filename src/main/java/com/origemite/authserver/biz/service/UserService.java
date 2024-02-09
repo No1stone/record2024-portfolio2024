@@ -1,6 +1,8 @@
 package com.origemite.authserver.biz.service;
 
 import com.google.gson.Gson;
+import com.origemite.authserver.advice.excep.CustomNotFoundException;
+import com.origemite.authserver.biz.controller.vo.ResUser;
 import com.origemite.authserver.data.db.entity.TbUser;
 import com.origemite.authserver.data.db.repo.TbUserRepo;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +46,12 @@ public class UserService implements UserDetailsService {
         return new User(String.valueOf(dto.getUsrId()), dto.getUsrPassword(), permission)
                 ;
     }
+
+    public ResUser selectUser(String usrId) throws CustomNotFoundException {
+        return tbUserRepo.findById(usrId)
+                .orElseThrow(() -> new CustomNotFoundException("아이디가 없습니다.")).toResUser();
+    }
+
 
 }
 
