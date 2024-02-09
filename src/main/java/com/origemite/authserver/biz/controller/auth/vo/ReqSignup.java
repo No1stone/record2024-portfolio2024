@@ -1,4 +1,4 @@
-package com.origemite.authserver.biz.controller.vo;
+package com.origemite.authserver.biz.controller.auth.vo;
 
 import com.origemite.authserver.cmm.MyFormatter;
 import com.origemite.authserver.config.ConfigPasswordEncoder;

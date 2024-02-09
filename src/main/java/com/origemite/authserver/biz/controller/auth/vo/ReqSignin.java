@@ -1,4 +1,4 @@
-package com.origemite.authserver.biz.controller.vo;
+package com.origemite.authserver.biz.controller.auth.vo;
 
 import jakarta.validation.constraints.Email;
 import lombok.Getter;

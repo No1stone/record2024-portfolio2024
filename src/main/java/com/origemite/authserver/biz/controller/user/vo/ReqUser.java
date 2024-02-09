@@ -1,4 +1,4 @@
-package com.origemite.authserver.biz.controller.vo;
+package com.origemite.authserver.biz.controller.user.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
