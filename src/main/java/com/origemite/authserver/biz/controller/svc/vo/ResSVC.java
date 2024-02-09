@@ -28,8 +28,8 @@ public class ResSVC {
     public static List<ResSVC> toVO(){
       return ServiceCode.LIST.stream().map(e ->
                       ResSVC.builder()
-                              .id(e.getId())
-                              .name(e.getName())
+                              .id(e.name())
+                              .name(e.getDisplayName())
                               .desc(e.getDesc())
                               .build()
               ).collect(Collectors.toList());
