@@ -1,5 +1,6 @@
 package com.origemite.authserver.data.db.entity;
 
+import com.origemite.authserver.biz.controller.policy.vo.ReqPolicyGroupSelect;
 import com.origemite.authserver.data.db.entity.id.TbPolicyGroupId;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -25,13 +26,20 @@ public class TbPolicyGroup {
 
     @Id
     @Column(name = "SVC_ROLE", nullable = false, length = 50)
-    private String svcRole;
+    private int svcRole;
 
     @Builder
-    public TbPolicyGroup(String plcId, String svcId, String svcRole) {
+    public TbPolicyGroup(String plcId, String svcId, int svcRole) {
         this.plcId = plcId;
         this.svcId = svcId;
         this.svcRole = svcRole;
     }
 
+    public ReqPolicyGroupSelect toTbPolicyGroup(){
+        return ReqPolicyGroupSelect.builder()
+                .plcId(this.plcId)
+                .svcId(this.svcId)
+                .svcRole(this.svcRole)
+                .build();
+    }
 }
