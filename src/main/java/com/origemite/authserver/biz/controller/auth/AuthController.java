@@ -1,9 +1,9 @@
-package com.origemite.authserver.biz.controller;
+package com.origemite.authserver.biz.controller.auth;
 
 import com.origemite.authserver.advice.excep.CustomBadRequestException;
-import com.origemite.authserver.biz.controller.vo.ReqSignin;
-import com.origemite.authserver.biz.controller.vo.ReqSignup;
-import com.origemite.authserver.biz.controller.vo.ResToken;
+import com.origemite.authserver.biz.controller.auth.vo.ReqSignin;
+import com.origemite.authserver.biz.controller.auth.vo.ReqSignup;
+import com.origemite.authserver.biz.controller.auth.vo.ResToken;
 import com.origemite.authserver.biz.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
