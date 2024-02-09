@@ -15,6 +15,6 @@ public class TbPolicyGroupId implements Serializable {
 
     private String svcId;
 
-    private String svcRole;
+    private int svcRole;
 
 }
