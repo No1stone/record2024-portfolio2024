@@ -1,6 +1,7 @@
 package com.origemite.authserver.data.db.entity;
 
 
+import com.origemite.authserver.biz.controller.policy.vo.ResPolicySelect;
 import com.origemite.authserver.data.db.entity.id.TbUserPolicyId;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -40,5 +41,15 @@ public class TbPolicy {
         this.plcName = plcName;
         this.createAt = createAt;
         this.updateAt = updateAt;
+    }
+
+    public ResPolicySelect toResPolicySelect() {
+        return ResPolicySelect.builder()
+                .plcId(this.plcId)
+                .ctmId(this.ctmId)
+                .plcName(this.plcName)
+                .createAt(this.createAt)
+                .updateAt(this.updateAt)
+                .build();
     }
 }

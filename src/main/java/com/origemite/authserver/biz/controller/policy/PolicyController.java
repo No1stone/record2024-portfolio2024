@@ -1,7 +1,9 @@
 package com.origemite.authserver.biz.controller.policy;
 
 
+import com.origemite.authserver.advice.excep.CustomNotFoundException;
 import com.origemite.authserver.biz.controller.policy.vo.ReqPolicySave;
+import com.origemite.authserver.biz.controller.policy.vo.ResPolicySelect;
 import com.origemite.authserver.biz.service.PolicyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +22,13 @@ public class PolicyController {
 
     @PostMapping({"","/"})
     public ResponseEntity PolociSave(@RequestBody ReqPolicySave dto){
-
         policyService.PolociSave(dto);
-
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/{plcId}")
+    public ResPolicySelect PolicySelect(@PathVariable(name = "plcId")String plcId) throws CustomNotFoundException {
+        return policyService.PolicySelect(plcId);
     }
 
 }
