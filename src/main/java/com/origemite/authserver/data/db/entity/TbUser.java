@@ -1,6 +1,6 @@
 package com.origemite.authserver.data.db.entity;
 
-import com.origemite.authserver.biz.controller.vo.ResUser;
+import com.origemite.authserver.biz.controller.user.vo.ResUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

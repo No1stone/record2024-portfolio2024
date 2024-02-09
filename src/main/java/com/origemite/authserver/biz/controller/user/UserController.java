@@ -1,12 +1,10 @@
-package com.origemite.authserver.biz.controller;
+package com.origemite.authserver.biz.controller.user;
 
 import com.origemite.authserver.advice.excep.CustomNotFoundException;
-import com.origemite.authserver.biz.controller.vo.ResUser;
+import com.origemite.authserver.biz.controller.user.vo.ResUser;
 import com.origemite.authserver.biz.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
