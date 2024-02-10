@@ -9,6 +9,7 @@ import com.origemite.authserver.data.db.repo.TbPolicyGroupRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -54,5 +55,15 @@ public class PolicyGroupService {
             }
         }
         return result;
+    }
+
+    @Transactional
+    public void PolicyGoroupBulkSave(ReqPolicyGroupBulkSave dto) throws CustomNotFoundException {
+        tbPolicyGroupRepo.saveAll(dto.toValidateTB());
+    }
+
+    @Transactional
+    public void PolicyGoroupDelete(ReqPolicyGroupDelete dto) {
+        tbPolicyGroupRepo.deleteById(dto.toTbPolicyGroupId());
     }
 }
