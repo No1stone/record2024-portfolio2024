@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
@@ -20,5 +21,8 @@ public enum ServiceCode {
             , CUSTOMER_SERVER
     );
 
+    public static boolean isName(String s){
+        return ServiceCode.LIST.stream().map(Enum::name).collect(Collectors.toList()).contains(s);
+    }
 
 }
