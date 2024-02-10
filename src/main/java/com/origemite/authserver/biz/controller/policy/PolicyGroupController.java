@@ -21,17 +21,27 @@ public class PolicyGroupController {
 
     private final PolicyGroupService policyGroupService;
 
-    @PostMapping({"","/"})
-    public ResponseEntity PolociGroupSave(@Validated @RequestBody ReqPolicyGroupSave dto){
+    @PostMapping("")
+    public ResponseEntity PolociGroupSave(@Validated @RequestBody ReqPolicyGroupSave dto) {
         policyGroupService.PolociGroupSave(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping({"","/"})
+    @GetMapping("")
     public List<ResPolicyGroupSelect> PolicyGroupSelect(@Validated @ModelAttribute(name = "dto") ReqPolicyGroupSelect dto) throws CustomNotFoundException {
         return policyGroupService.PolicyGroupSelect(dto);
     }
 
 
+    @PutMapping("")
+    public ResponseEntity PolicyGoroupBulkSave(@RequestBody ReqPolicyGroupBulkSave dto) throws CustomNotFoundException {
+        policyGroupService.PolicyGoroupBulkSave(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
+    @DeleteMapping("")
+    public ResponseEntity PolicyGoroupDelete(@RequestBody ReqPolicyGroupDelete dto) throws CustomNotFoundException {
+        policyGroupService.PolicyGoroupDelete(dto);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
