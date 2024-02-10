@@ -1,6 +1,7 @@
 package com.origemite.authserver.biz.controller.user;
 
 import com.origemite.authserver.advice.excep.CustomNotFoundException;
+import com.origemite.authserver.biz.controller.user.vo.ReqUserPolicyDelete;
 import com.origemite.authserver.biz.controller.user.vo.ReqUserPolicySave;
 import com.origemite.authserver.biz.controller.user.vo.ResUserPolicySelect;
 import com.origemite.authserver.biz.service.UserPolicyService;
@@ -23,12 +24,18 @@ public class UserPolicyController {
 
     @PostMapping("")
     public ResponseEntity UserPolicyServiceSave(@RequestBody ReqUserPolicySave dto){
+        userPolicyService.UserPolicyServiceSave(dto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/{usrId}")
     public List<ResUserPolicySelect> UserPolicyServiceSelect(@PathVariable(name = "usrId")String usrId) throws CustomNotFoundException {
         return userPolicyService.UserPolicyServiceSelect(usrId);
+    }
+    @DeleteMapping("")
+    public ResponseEntity UserPolicyServiceDelete(@RequestBody ReqUserPolicyDelete dto){
+        userPolicyService.UserPolicyServiceDelete(dto);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
