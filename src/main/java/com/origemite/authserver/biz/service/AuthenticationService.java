@@ -29,7 +29,7 @@ public class AuthenticationService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsrId(), request.getPassword()));
-        var jwt = jwtService.generateAccessToken(user.getUsrId());
+        var jwt = jwtService.signin(user.getUsrId());
         return jwt;
     }
 
@@ -41,7 +41,7 @@ public class AuthenticationService {
             throw  new CustomBadRequestException("이미 가입한 이메일입니다.");
         }
         TbUser user = tbUserRepo.save(dto.toUserRepoSave(passwordEncoder));
-        var jwt = jwtService.generateAccessToken(user.getUsrId());
+        var jwt = jwtService.signin(user.getUsrId());
 
         return jwt;
     }

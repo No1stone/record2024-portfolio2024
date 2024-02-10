@@ -1,5 +1,6 @@
 package com.origemite.authserver.biz.service;
 
+import com.origemite.authserver.biz.controller.auth.vo.OrigemiteToken;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -24,7 +25,8 @@ public class JwtService {
 
     @Value("${jwt.refreshMillis}")
     private long refreshMillis;
-    public String generateAccessToken(String usrId) {
+
+    private String generateAccessToken(String usrId) {
         return Jwts.builder()
                 .setSubject(usrId)
                 .setIssuedAt(new Date())
@@ -34,13 +36,25 @@ public class JwtService {
 
     }
 
-    public String generateRefreshToken(String usrId) {
+    private String generateRefreshToken(String usrId) {
         return Jwts.builder()
                 .setSubject(usrId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + refreshMillis))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    private OrigemiteToken generateToken(String usrId){
+        return OrigemiteToken.builder()
+                .accessToken(generateAccessToken(usrId))
+                .refreshToken(generateRefreshToken(usrId))
+                .build();
+    }
+
+    public String signin(String usrId){
+        OrigemiteToken origemiteToken = generateToken(usrId);
+        return origemiteToken.getAccessToken();
     }
 
     public String getUsernameFromToken(String token) {
