@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
 
 @Getter
@@ -20,9 +21,13 @@ public class HdTokenRefresh {
 //    @Indexed
     private String usrId;
 
+    @TimeToLive
+    private Long expiration;
     @Builder
-    public HdTokenRefresh(String tknResresh, String usrId) {
+    public HdTokenRefresh(String tknResresh, String usrId, Long expiration) {
         this.tknResresh = tknResresh;
         this.usrId = usrId;
+        this.expiration = expiration;
     }
+
 }
