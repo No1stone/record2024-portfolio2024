@@ -1,5 +1,6 @@
 package com.origemite.authserver.data.db.entity;
 
+import com.origemite.authserver.biz.controller.user.vo.ResUserPolicySelect;
 import com.origemite.authserver.data.db.entity.id.TbUserPolicyId;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -29,4 +30,10 @@ public class TbUserPolicy {
         this.plcId = plcId;
     }
 
+    public ResUserPolicySelect toUserPolicySelect(){
+        return ResUserPolicySelect.builder()
+                .plcId(this.plcId)
+                .usrId(this.usrId)
+                .build();
+    }
 }
