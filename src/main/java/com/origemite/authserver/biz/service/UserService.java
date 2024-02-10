@@ -50,6 +50,11 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new CustomNotFoundException("아이디가 없습니다.")).toResUser();
     }
 
+    public void UserPolicySelect(String usrId){
+
+
+        log.info("", new Gson().toJson("a"));
+    }
 
 }
 
