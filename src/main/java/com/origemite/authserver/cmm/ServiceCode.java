@@ -3,8 +3,7 @@ package com.origemite.authserver.cmm;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
@@ -25,4 +24,11 @@ public enum ServiceCode {
         return ServiceCode.LIST.stream().map(Enum::name).collect(Collectors.toList()).contains(s);
     }
 
+    public static Map<String, Set<Integer>> policyBaseInstance(){
+        Map<String, Set<Integer>> result = new HashMap<>();
+        for(String e :ServiceCode.LIST.stream().map(Enum::name).collect(Collectors.toList())){
+            result.put(e, new HashSet<>());
+        }
+        return result;
+    }
 }
