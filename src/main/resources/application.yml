@@ -19,6 +19,9 @@ spring:
     listener:
       simple:
         prefetch: 5
+  redis:
+    host: localhost
+    port: 6379
 
   #https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html
 management:

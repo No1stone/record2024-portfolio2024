@@ -22,7 +22,7 @@ import java.time.Duration;
 
 @Configuration
 @EnableCaching
-@EnableRedisRepositories("com.origemite.authserver.data.redis.repo")
+@EnableRedisRepositories("com.origemite.gateway.data.redis.repo")
 public class ConfigRedis implements CachingConfigurer {
 
     /**
