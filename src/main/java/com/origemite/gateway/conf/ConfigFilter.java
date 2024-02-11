@@ -21,12 +21,11 @@ public class ConfigFilter {
                 .route("authserver", r -> r.path("/authserver/**")
                         .filters(
                                 f   -> f
-                                        .rewritePath("/authserver/(?<segment>.*)", "/${segment}")
                                         .filter(jwtAuthenticationFilter.apply(new JwtAuthenticationFilter.Config()))
+                                        .rewritePath("/authserver/(?<segment>.*)", "/${segment}")
                         )
                         .uri("lb://authserver"))
                 .build();
     }
-
 
 }

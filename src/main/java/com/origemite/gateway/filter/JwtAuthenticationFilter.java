@@ -1,5 +1,6 @@
 package com.origemite.gateway.filter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.origemite.gateway.service.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -17,6 +18,7 @@ import javax.security.sasl.AuthenticationException;
 public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAuthenticationFilter.Config> {
 
     private final JwtService jwtService;
+
     public JwtAuthenticationFilter(JwtService jwtService) {
         super(Config.class);
         this.jwtService = jwtService;
@@ -30,18 +32,34 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                     return exchange.getResponse().setComplete();
                 }
-            } catch (AuthenticationException e) {
-                throw new RuntimeException(e);
+            } catch (AuthenticationException | JsonProcessingException e) {
+                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                return exchange.getResponse().setComplete();
             }
             return chain.filter(exchange);
         };
     }
 
-    private boolean isJwtValid(ServerWebExchange exchange) throws AuthenticationException {
+    private boolean isJwtValid(ServerWebExchange exchange) throws AuthenticationException, JsonProcessingException {
 
         ServerHttpRequest req = exchange.getRequest();
         ServerHttpResponse res = exchange.getResponse();
-        boolean result = jwtService.isJwtValid(req);
+        String uri = req.getURI().toString();
+        String path = req.getPath().toString();
+        log.info("path = "+ path);
+        if (path.startsWith("/authserver")) {
+            String newPath = path.replaceFirst("/authserver", "");
+            ServerHttpRequest newRequest = req.mutate()
+                    .path(newPath)
+                    .build();
+            log.info("newPath = "+ newPath);
+            // 새로운 요청 객체로 ServerWebExchange 교체
+            ServerWebExchange newExchange = exchange.mutate()
+                    .request(newRequest)
+                    .build();
+
+            boolean result = jwtService.isJwtValid(newExchange.getRequest());
+        }
         return true; // 임시로 항상 true를 반환
     }
 
