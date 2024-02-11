@@ -1,5 +1,6 @@
 package com.origemite.authserver.biz.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.origemite.authserver.advice.excep.CustomBadRequestException;
 import com.origemite.authserver.biz.controller.auth.vo.ReqSignin;
 import com.origemite.authserver.biz.controller.auth.vo.ReqSignup;
@@ -24,7 +25,7 @@ public class AuthenticationService {
     private final ConfigPasswordEncoder passwordEncoder;
 
 
-    public String signin(ReqSignin request) {
+    public String signin(ReqSignin request) throws JsonProcessingException {
         var user = tbUserRepo.findByUsrEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
         authenticationManager.authenticate(
@@ -34,7 +35,7 @@ public class AuthenticationService {
     }
 
     @Transactional
-    public String signup(ReqSignup dto) throws CustomBadRequestException {
+    public String signup(ReqSignup dto) throws CustomBadRequestException, JsonProcessingException {
         String result = "";
 //        log.info("signup = {}", new Gson().toJson(dto.toUserRepoSave(passwordEncoder)));
         if(tbUserRepo.existsByUsrEmail(dto.getUsrEmail())){

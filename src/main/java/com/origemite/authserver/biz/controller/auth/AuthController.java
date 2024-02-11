@@ -1,5 +1,6 @@
 package com.origemite.authserver.biz.controller.auth;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.origemite.authserver.advice.excep.CustomBadRequestException;
 import com.origemite.authserver.biz.controller.auth.vo.ReqSignin;
 import com.origemite.authserver.biz.controller.auth.vo.ReqSignup;
@@ -22,12 +23,13 @@ public class AuthController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/signin")
-    public ResToken OrigemiteSignin(@RequestBody ReqSignin request) {
+    public ResToken OrigemiteSignin(@RequestBody ReqSignin request) throws JsonProcessingException {
         return ResToken.builder().token(authenticationService.signin(request)).build();
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ResToken> OrigemiteSignup(@Validated @RequestBody ReqSignup request) throws CustomBadRequestException {
+    public ResponseEntity<ResToken> OrigemiteSignup(@Validated @RequestBody ReqSignup request)
+            throws CustomBadRequestException, JsonProcessingException {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ResToken.builder().token(authenticationService.signup(request)).build());
     }
