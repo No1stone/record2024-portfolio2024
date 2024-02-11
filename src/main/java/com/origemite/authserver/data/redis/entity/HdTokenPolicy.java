@@ -7,7 +7,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
+import org.springframework.data.redis.core.index.Indexed;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,16 +22,15 @@ public class HdTokenPolicy {
     @Id
     private String tknResresh;
 
-    private Map<String, Set<Integer>> policyAndRole;
+    private String svcRoles ;// 서비스 역할
 
     @TimeToLive
     private Long expiration;
 
     @Builder
-    public HdTokenPolicy(String tknResresh, Map<String, Set<Integer>> policyAndRole, Long expiration) {
+    public HdTokenPolicy(String tknResresh, String svcRoles, Long expiration) {
         this.tknResresh = tknResresh;
-        this.policyAndRole = policyAndRole;
+        this.svcRoles = svcRoles;
         this.expiration = expiration;
     }
-
 }
