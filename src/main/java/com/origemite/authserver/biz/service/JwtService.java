@@ -1,6 +1,18 @@
 package com.origemite.authserver.biz.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.origemite.authserver.biz.controller.auth.vo.OrigemiteToken;
+import com.origemite.authserver.cmm.ServiceCode;
+import com.origemite.authserver.data.db.repo.TbUserRepo;
+import com.origemite.authserver.data.db.repo.dsl.vo.UserPolicyDto;
+import com.origemite.authserver.data.redis.entity.HdTokenAccess;
+import com.origemite.authserver.data.redis.entity.HdTokenPolicy;
+import com.origemite.authserver.data.redis.entity.HdTokenRefresh;
+import com.origemite.authserver.data.redis.repo.HdTokenAccessRepo;
+import com.origemite.authserver.data.redis.repo.HdTokenPolicyRepo;
+import com.origemite.authserver.data.redis.repo.HdTokenRefreshRepo;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -10,7 +22,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +38,11 @@ public class JwtService {
 
     @Value("${jwt.refreshMillis}")
     private long refreshMillis;
+
+    private final HdTokenAccessRepo hdTokenAccessRepo;
+    private final HdTokenRefreshRepo hdTokenRefreshRepo;
+    private final HdTokenPolicyRepo hdTokenPolicyRepo;
+    private final TbUserRepo tbUserRepo;
 
     private String generateAccessToken(String usrId) {
         return Jwts.builder()
@@ -45,15 +63,52 @@ public class JwtService {
                 .compact();
     }
 
-    private OrigemiteToken generateToken(String usrId){
+    private OrigemiteToken generateToken(String usrId) {
         return OrigemiteToken.builder()
                 .accessToken(generateAccessToken(usrId))
                 .refreshToken(generateRefreshToken(usrId))
                 .build();
     }
 
-    public String signin(String usrId){
+    public String signin(String usrId) throws JsonProcessingException {
         OrigemiteToken origemiteToken = generateToken(usrId);
+        long accessSec = accessMillis / 1000;
+        long refreshSec = refreshMillis / 1000;
+
+        hdTokenRefreshRepo.save(HdTokenRefresh.builder()
+                .usrId(usrId)
+                .tknResresh(origemiteToken.getRefreshToken())
+                .expiration(refreshSec)
+                .build());
+
+        hdTokenAccessRepo.save(HdTokenAccess.builder()
+                .tknAccess(origemiteToken.getAccessToken())
+                .tknResresh(origemiteToken.getRefreshToken())
+                .expiration(accessSec)
+                .build());
+
+        List<UserPolicyDto> userPolicy = tbUserRepo.UserPolicySelect(usrId).stream()
+                .toList();
+        log.info("userPolicy  - - - {}", new Gson().toJson(userPolicy));
+
+        Map<String, Set<Integer>> base = ServiceCode.policyBaseInstance();
+
+        for (UserPolicyDto e : userPolicy) {
+            Set<Integer> roles = base.get(e.getSvcId());
+            roles.add(e.getSvcRole());
+            base.put(e.getSvcId(), roles);
+        }
+        log.info("변환 - {}", new Gson().toJson(base));
+
+        String jsonMap = new ObjectMapper().writeValueAsString(base);
+
+        hdTokenPolicyRepo.save(HdTokenPolicy.builder()
+                .tknResresh(origemiteToken.getRefreshToken())
+                .svcRoles(jsonMap)
+                .expiration(refreshSec)
+                .build());
+
+        log.info("마지막 저장");
         return origemiteToken.getAccessToken();
     }
 
@@ -81,4 +136,6 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+
 }
