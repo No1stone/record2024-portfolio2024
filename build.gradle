@@ -99,7 +99,16 @@ tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
 	dependsOn test
 }
+/**
+def generatedDir = 'src/main/generated'
 
+clean {
+	delete file (generatedDir)
+}
+*/
+
+
+// QueryDsl 빌드 옵션 (선택)
 def querydslDir = "$buildDir/generated/querydsl"
 
 sourceSets {
@@ -113,24 +122,3 @@ tasks.withType(JavaCompile) {
 clean.doLast {
 	file(querydslDir).deleteDir()
 }
-
-
-// querydsl 추가 시작
-//def querydslDir = "$buildDir/generated/querydsl"
-// //def querydslDir = "src/main/qfile"
-// //def querydslDir = "src/main/java/egovframework/example/jpa/qfile"
-//querydsl {
-//	library = 'com.querydsl:querydsl-apt:5.0.0'
-//	jpa = true
-//	querydslSourcesDir = querydslDir
-//}
-//sourceSets {
-//	main.java.srcDir querydslDir
-//}
-//configurations {
-//	querydsl.extendsFrom compileClasspath
-//}
-//compileQuerydsl {
-//	options.annotationProcessorPath = configurations.querydsl
-//}
-// querydsl 추가 끝
