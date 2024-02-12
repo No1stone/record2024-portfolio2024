@@ -1,7 +1,7 @@
 package com.origemite.gateway.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.origemite.gateway.service.JwtService;
+import com.origemite.gateway.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -17,9 +17,9 @@ import javax.security.sasl.AuthenticationException;
 @Slf4j
 public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAuthenticationFilter.Config> {
 
-    private final JwtService jwtService;
+    private final AuthService jwtService;
 
-    public JwtAuthenticationFilter(JwtService jwtService) {
+    public JwtAuthenticationFilter(AuthService jwtService) {
         super(Config.class);
         this.jwtService = jwtService;
     }
@@ -57,7 +57,6 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
             ServerWebExchange newExchange = exchange.mutate()
                     .request(newRequest)
                     .build();
-
             boolean result = jwtService.isJwtValid(newExchange.getRequest());
         }
         return true; // 임시로 항상 true를 반환
