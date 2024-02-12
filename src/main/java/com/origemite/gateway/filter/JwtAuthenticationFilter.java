@@ -17,11 +17,11 @@ import javax.security.sasl.AuthenticationException;
 @Slf4j
 public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAuthenticationFilter.Config> {
 
-    private final AuthService jwtService;
+    private final AuthService authService;
 
     public JwtAuthenticationFilter(AuthService jwtService) {
         super(Config.class);
-        this.jwtService = jwtService;
+        this.authService = jwtService;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
             ServerWebExchange newExchange = exchange.mutate()
                     .request(newRequest)
                     .build();
-            boolean result = jwtService.isJwtValid(newExchange.getRequest());
+            boolean result = authService.isJwtValid(newExchange.getRequest());
         }
         return true; // 임시로 항상 true를 반환
     }
