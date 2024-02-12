@@ -89,7 +89,6 @@ public class JwtService {
 
         List<UserPolicyDto> userPolicy = tbUserRepo.UserPolicySelect(usrId).stream()
                 .toList();
-        log.info("userPolicy  - - - {}", new Gson().toJson(userPolicy));
 
         Map<String, Set<Integer>> base = ServiceCode.policyBaseInstance();
 
@@ -98,8 +97,6 @@ public class JwtService {
             roles.add(e.getSvcRole());
             base.put(e.getSvcId(), roles);
         }
-        log.info("변환 - {}", new Gson().toJson(base));
-
         String jsonMap = new ObjectMapper().writeValueAsString(base);
 
         hdTokenPolicyRepo.save(HdTokenPolicy.builder()
@@ -107,8 +104,6 @@ public class JwtService {
                 .svcRoles(jsonMap)
                 .expiration(refreshSec)
                 .build());
-
-        log.info("마지막 저장");
         return origemiteToken.getAccessToken();
     }
 

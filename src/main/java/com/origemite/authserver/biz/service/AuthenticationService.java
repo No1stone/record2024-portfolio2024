@@ -38,8 +38,8 @@ public class AuthenticationService {
     public String signup(ReqSignup dto) throws CustomBadRequestException, JsonProcessingException {
         String result = "";
 //        log.info("signup = {}", new Gson().toJson(dto.toUserRepoSave(passwordEncoder)));
-        if(tbUserRepo.existsByUsrEmail(dto.getUsrEmail())){
-            throw  new CustomBadRequestException("이미 가입한 이메일입니다.");
+        if (tbUserRepo.existsByUsrEmail(dto.getUsrEmail())) {
+            throw new CustomBadRequestException("이미 가입한 이메일입니다.");
         }
         TbUser user = tbUserRepo.save(dto.toUserRepoSave(passwordEncoder));
         var jwt = jwtService.signin(user.getUsrId());
