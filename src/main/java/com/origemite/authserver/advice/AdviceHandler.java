@@ -38,7 +38,6 @@ public class AdviceHandler {
         log.error(e.getMessage());
         return "cmm/error/error";
     }
-
     @ExceptionHandler
     public ResponseEntity CustomRuntime(CustomRuntimeException e) {
         ErrorResult er = new ErrorResult();
