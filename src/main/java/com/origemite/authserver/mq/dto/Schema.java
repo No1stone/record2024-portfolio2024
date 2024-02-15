@@ -17,7 +17,7 @@ public class Schema {
 
     public static Schema UserSchema(){
         List<Field> fields = Arrays.asList(
-            new Field("String", true, "USR_ID")
+            new Field("string", true, "USR_ID")
                 , new Field("string",true, "CTM_ID")
                 , new Field("string",true, "USR_EMAIL")
                 , new Field("string",true, "USR_PASSWORD")
