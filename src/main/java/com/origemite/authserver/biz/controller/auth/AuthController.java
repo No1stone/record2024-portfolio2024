@@ -23,7 +23,7 @@ public class AuthController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/signin")
-    public ResToken OrigemiteSignin(@RequestBody ReqSignin request) throws JsonProcessingException {
+    public ResToken OrigemiteSignin(@Validated @RequestBody ReqSignin request) throws JsonProcessingException {
         return ResToken.builder().token(authenticationService.signin(request)).build();
     }
 
