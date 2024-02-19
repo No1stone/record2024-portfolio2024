@@ -5,6 +5,7 @@ import com.origemite.authserver.biz.controller.policy.vo.ResPolicyGroupSelect;
 import com.origemite.authserver.data.db.entity.id.TbPolicyGroupId;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "TB_POLICY_GROUP")
 @Entity
 @Setter
+@Getter
 @NoArgsConstructor
 @DynamicUpdate
 @IdClass(TbPolicyGroupId.class)
