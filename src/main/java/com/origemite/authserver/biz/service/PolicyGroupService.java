@@ -23,9 +23,10 @@ public class PolicyGroupService {
 
     private final TbPolicyGroupRepo tbPolicyGroupRepo;
 
-
-    public void PolociGroupSave(ReqPolicyGroupSave dto) {
-        tbPolicyGroupRepo.save(dto.toTbPolicyGroup());
+    @Transactional
+    public String PolociGroupSave(ReqPolicyGroupSave dto) {
+        return tbPolicyGroupRepo.save(dto.toTbPolicyGroup()).getPlcId()
+                ;
     }
 
     public List<ResPolicyGroupSelect> PolicyGroupSelect(ReqPolicyGroupSelect dto) throws CustomNotFoundException {
@@ -36,7 +37,7 @@ public class PolicyGroupService {
             chkPlc = true;
         }
         if (dto.getSvcId() != null) {
-            if(!ServiceCode.LIST.stream().map(e -> e.name()).collect(Collectors.toList()).contains(dto.getSvcId())){
+            if (!ServiceCode.LIST.stream().map(e -> e.name()).collect(Collectors.toList()).contains(dto.getSvcId())) {
                 throw new CustomNotFoundException("서비스 코드를 확인해주세요");
             }
             chkSvc = true;
