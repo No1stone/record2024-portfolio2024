@@ -31,6 +31,7 @@ public class ReqPolicyGroupBulkSave {
 
     private HashMap<String, Set<Integer>> policyRole;
 
+    @Builder
     public ReqPolicyGroupBulkSave(String plcId, HashMap<String, Set<Integer>> policyRole) {
         this.plcId = plcId;
         this.policyRole = policyRole;
@@ -63,4 +64,7 @@ public class ReqPolicyGroupBulkSave {
         }
         return result;
     }
+
+
+
 }
