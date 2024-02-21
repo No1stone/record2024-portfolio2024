@@ -25,7 +25,7 @@ public class UserPolicyController {
     @PostMapping("")
     public ResponseEntity UserPolicyServiceSave(@RequestBody ReqUserPolicySave dto){
         userPolicyService.UserPolicyServiceSave(dto);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{usrId}")
