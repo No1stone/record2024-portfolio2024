@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51734b28-ed3d-4198-82a1-c7fc3e133526" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/portfolio.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +31,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/wonseok/Documents/github/portfolio2024",
+    "last_opened_file_path": "/home/wonseok/Documents/github/portfolio2024/gateway",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,7 +57,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708662458228</updated>
-      <workItem from="1708662459592" duration="1406000" />
+      <workItem from="1708662459592" duration="3266000" />
     </task>
     <servers />
   </component>
